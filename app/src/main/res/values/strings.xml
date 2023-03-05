@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Practica Geolocalizacion</string>
+    <string name="text_view_titulo">Obtener Ubicación de Usuario</string>
+    <string name="text_view_latitud">Latitud</string>
+    <string name="text_view_longitud">Longitud</string>
+    <string name="text_view_direccion">Dirección</string>
+    <string name="button_obtener">Obtener Coordenadas</string>
+    <string name="button_whatsapp">Compartir por Whatsapp</string>
+    <string name="button_map">Ver Mapa</string>
+</resources>
