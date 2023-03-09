@@ -7,4 +7,7 @@
     <string name="button_obtener">Obtener Coordenadas</string>
     <string name="button_whatsapp">Compartir por Whatsapp</string>
     <string name="button_map">Ver Mapa</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

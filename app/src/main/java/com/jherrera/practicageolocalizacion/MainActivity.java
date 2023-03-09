@@ -28,6 +28,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonObtenerCoordenada;
+    private Button buttonCompartirWhatsApp;
+    private Button buttonVerMapa;
     private TextView textViewLatitud;
     private TextView textViewLongitud;
     private TextView textViewDireccion;
@@ -43,15 +45,46 @@ public class MainActivity extends AppCompatActivity {
 
     private void setInitComponents() {
         buttonObtenerCoordenada = findViewById(R.id.buttonObtenerCoordenadas);
+        buttonCompartirWhatsApp = findViewById(R.id.buttonCompartirWhatsApp);
+        buttonVerMapa = findViewById(R.id.buttonVerMapa);
         textViewLatitud = findViewById(R.id.textViewObtenerLatitud);
         textViewLongitud = findViewById(R.id.textViewObtenerLongitud);
         textViewDireccion = findViewById(R.id.textViewObtenerDireccion);
+        estadoBotonesCompartir(false);
+    }
+
+    private void estadoBotonesCompartir(boolean estado) {
+        buttonCompartirWhatsApp.setEnabled(estado);
+        buttonVerMapa.setEnabled(estado);
     }
 
     private void addEventButtons() {
         buttonObtenerCoordenada.setOnClickListener(view -> {
             obtenerUbicacion();
+            estadoBotonesCompartir(true);
         });
+
+        buttonCompartirWhatsApp.setOnClickListener(view -> {
+            compartirPorWhatsApp();
+        });
+
+        buttonVerMapa.setOnClickListener(view-> {
+            Intent intent = new Intent(this, MapOSMActivity.class);
+            intent.putExtra("longitud", Double.parseDouble(textViewLongitud.getText().toString()));
+            intent.putExtra("latitud", Double.parseDouble(textViewLatitud.getText().toString()));
+            startActivity(intent);
+        });
+    }
+
+    private void compartirPorWhatsApp() {
+        Intent intentWhatsApp = new Intent(Intent.ACTION_SEND);
+        intentWhatsApp.setType("text/plain");
+        intentWhatsApp.setPackage("com.whatsapp");
+        String latitud = textViewLatitud.getText().toString();
+        String longitud = textViewLongitud.getText().toString();
+        String url = "https://maps.google.com/?q="+latitud+","+longitud+"";
+        intentWhatsApp.putExtra(Intent.EXTRA_TEXT, "Hola!, te adjunto mi ubicación: "+url);
+        startActivity(intentWhatsApp);
     }
 
     private void obtenerUbicacion() {
